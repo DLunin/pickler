@@ -14,7 +14,11 @@ class AssignmentFinder(ast.NodeVisitor):
         self.variables = set()
     
     def visit_Assign(self, node):
-        self.variables |= {target.id for target in node.targets}
+        for target in node.targets:
+            if isinstance(target, Tuple):
+                self.variables |= {var.id for var in target.elts}
+            else:
+                self.variables.add(target.id)
         ast.NodeVisitor.generic_visit(self, node)
 
 
