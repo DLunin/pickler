@@ -31,7 +31,7 @@ class PicklerMagic(Magics):
         
         visitor = AssignmentFinder()
         visitor.visit(ast.parse(code))
-        variables = visitor.variables
+        variables = sorted(list(visitor.variables))
         
         try:
             with open(path, 'rb') as dump:
