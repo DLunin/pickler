@@ -3,7 +3,6 @@ import os
 import os.path
 import pickle
 import hashlib
-import inspect
 import __main__
 from IPython.core.magic import Magics, magics_class, line_cell_magic
 
@@ -42,7 +41,7 @@ class PicklerMagic(Magics):
                 return result
         except FileNotFoundError:
             namespace = {}
-            result = exec(code, globals().get(__main__, None), namespace)
+            result = exec(code, vars(__main__), namespace)
             for key, val in namespace.items():
                 setattr(__main__, key, val)
             data = tuple(namespace[variable] for variable in variables)
@@ -50,7 +49,4 @@ class PicklerMagic(Magics):
             with open(path, 'wb') as dump:
                 pickle.dump((data, result), dump)
             return result
-
-ip = get_ipython()
-ip.register_magics(PicklerMagic)
 
