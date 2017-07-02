@@ -15,7 +15,7 @@ class AssignmentFinder(ast.NodeVisitor):
     
     def visit_Assign(self, node):
         for target in node.targets:
-            if isinstance(target, Tuple):
+            if isinstance(target, ast.Tuple):
                 self.variables |= {var.id for var in target.elts}
             else:
                 self.variables.add(target.id)
