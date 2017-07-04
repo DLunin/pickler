@@ -1,7 +1,7 @@
 # pickler
 IPython Notebook magic to make and load pickle dumps of all assignments in a cell or a line
 
-*PyPI package*: pickler-magic
+**PyPI package**: pickler-magic
 
 ## Description
 
